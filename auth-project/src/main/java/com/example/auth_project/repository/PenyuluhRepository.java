@@ -12,12 +12,12 @@ import java.util.Date;
 @Repository
 public interface PenyuluhRepository extends JpaRepository<Penyuluh, Long> {
     @Query(value = "SELECT s FROM Penyuluh s WHERE " +
-            "(?1 IS NULL OR CONCAT(s.namaPenyuluh, '') LIKE %?1%) AND " +
+            "(?1 IS NULL OR UPPER(CONCAT(s.namaPenyuluh, '')) LIKE %?1%) AND " +
             "(?2 IS NULL OR CONCAT(s.nipPenyuluh, '') LIKE %?2%)")
     Page<Penyuluh> getPenyuluhPageFilter(String namaPenyuluh, String nipPenyuluh, Pageable pageable);
 
     @Query(value = "SELECT s FROM Penyuluh s WHERE " +
-            "(?1 IS NULL OR CONCAT(s.namaPenyuluh, '') LIKE %?1%) AND " +
+            "(?1 IS NULL OR UPPER(CONCAT(s.namaPenyuluh, '')) LIKE %?1%) AND " +
             "(?2 IS NULL OR CONCAT(s.nipPenyuluh, '') LIKE %?2%) AND " +
             "s.makerDate BETWEEN ?3 AND ?4")
     Page<Penyuluh> getPenyuluhPageFilterWithDate(String namaPenyuluh, String nipPenyuluh, Date startDate, Date endDate, Pageable pageable);

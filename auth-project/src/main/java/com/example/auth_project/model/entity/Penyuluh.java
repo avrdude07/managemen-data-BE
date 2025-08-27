@@ -4,10 +4,13 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "data_penyuluh")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -59,6 +62,7 @@ public class Penyuluh {
     @Column(name = "provinsi")
     private String provinsi;
 
+    @CreatedDate
     @Column(name = "maker_date", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date makerDate;
