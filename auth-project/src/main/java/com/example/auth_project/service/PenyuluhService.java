@@ -1,5 +1,6 @@
 package com.example.auth_project.service;
 
+import com.example.auth_project.exception.GeneralException;
 import com.example.auth_project.helper.FileDownloadHelper;
 import com.example.auth_project.helper.GenerateArrayReportingHelper;
 import com.example.auth_project.helper.GenerateExcelHelper;
@@ -84,7 +85,7 @@ public class PenyuluhService {
         Penyuluh checkStock= penyuluhRepository.findByNamaPenyuluh(penyuluhRequestDTO.getNamaPenyuluh());
         if (checkStock != null){
             log.error("An error occurred while updating penyuluh");
-            throw new RuntimeException("Data Penyuluh Sudah Ada");
+            throw new GeneralException("Data Penyuluh Sudah Ada");
         }
 
         penyuluhRepository.save(penyuluh);
@@ -92,14 +93,8 @@ public class PenyuluhService {
 
     @Transactional
     public void updateStock(PenyuluhRequestDTO penyuluhRequestDTO) {
-        Penyuluh checkStock= penyuluhRepository.findByNamaPenyuluh(penyuluhRequestDTO.getNamaPenyuluh());
-        if (checkStock != null){
-            log.error("An error occurred while updating penyuluh");
-            throw new RuntimeException("Data Penyuluh Sudah Ada");
-        }
-
         Penyuluh penyuluh = penyuluhRepository.findById(penyuluhRequestDTO.getPenyuluhId())
-                .orElseThrow(() -> new RuntimeException("penyuluh with id " + penyuluhRequestDTO.getPenyuluhId() + " does not exist"));
+                .orElseThrow(() -> new GeneralException("penyuluh with id " + penyuluhRequestDTO.getPenyuluhId() + " does not exist"));
 
         penyuluh.setPenyuluhId(penyuluhRequestDTO.getPenyuluhId());
         penyuluh.setNamaPenyuluh(penyuluhRequestDTO.getNamaPenyuluh());
@@ -115,10 +110,6 @@ public class PenyuluhService {
         penyuluh.setPendidikanTerakhir(penyuluhRequestDTO.getPendidikanTerakhir());
         penyuluh.setKecamatan(penyuluhRequestDTO.getKecamatan());
         penyuluh.setProvinsi(penyuluhRequestDTO.getProvinsi());
-
-
-
-
         penyuluhRepository.save(penyuluh);
     }
 
@@ -127,14 +118,15 @@ public class PenyuluhService {
         boolean exists = penyuluhRepository.existsById(penyuluhId);
         if(!exists){
             log.error("An error occurred while deleting  stock");
-            throw new RuntimeException("stock with id " + penyuluhId + " does not exists");
+            log.error("stock with id " + penyuluhId + " does not exists");
+            throw new GeneralException("Error deleting penyuluh");
         }
         penyuluhRepository.deleteById(penyuluhId);
     }
 
     public Penyuluh getPenyuluhById(Long penyuluhId) {
         return penyuluhRepository.findById(penyuluhId)
-                .orElseThrow(() -> new RuntimeException("penyuluh with id " + penyuluhId + " does not exist"));
+                .orElseThrow(() -> new GeneralException("penyuluh with id " + penyuluhId + " does not exist"));
     }
 
     @SneakyThrows
@@ -142,7 +134,7 @@ public class PenyuluhService {
         FileDownloadHelper downloadHelper = new FileDownloadHelper();
         String resultExcel = generateExcelMps(namaPenyuluh, fromDate, toDate, nipPenyuluh, offset, limit, sortBy, orderBy);
         if (resultExcel.contains("error")) {
-           throw new RuntimeException("Error at parsing excel");
+           throw new GeneralException("Error at parsing excel");
         } else {
             Resource resource;
             try {
@@ -169,7 +161,8 @@ public class PenyuluhService {
         DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("ddMMyyyy");
         String currentDate = dateObj.format(formatterDate);
         String excelHeader = "Reporting Penyuluh_" + currentDate;
-        String uploadPath = "D:\\application\\note\\" + excelHeader + ".xlsx";
+        //String uploadPath = "D:\\application\\note\\" + excelHeader + ".xlsx";
+        String uploadPath = "C:\\Users\\basaj\\Downloads\\Rekap Data Penyuluh" + excelHeader + ".xlsx";
         String reportingType = "MPS";
         String resultExcel = GenerateExcelHelper.excelWrite(uploadPath, reportingType, listGabung);
         return resultExcel;
