@@ -23,6 +23,7 @@ public interface PenyuluhRepository extends JpaRepository<Penyuluh, Long> {
     Page<Penyuluh> getPenyuluhPageFilterWithDate(String namaPenyuluh, String nipPenyuluh, Date startDate, Date endDate, Pageable pageable);
 
     Penyuluh findByNamaPenyuluh(String productName);
+    Penyuluh findByNipPenyuluh(Long nip);
 
     boolean existsByNamaPenyuluh(String productName);
 }

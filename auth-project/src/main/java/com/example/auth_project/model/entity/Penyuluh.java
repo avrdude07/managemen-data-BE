@@ -25,7 +25,7 @@ public class Penyuluh {
     @Column(name = "nama_penyuluh", nullable = false)
     private String namaPenyuluh;
 
-    @Column(name = "nip_penyuluh", nullable = false)
+    @Column(name = "nip_penyuluh", nullable = false, unique = true)
     private Long nipPenyuluh;
 
     @Column(name = "jenis_kelamin", nullable = false)
@@ -40,6 +40,9 @@ public class Penyuluh {
 
     @Column(name = "golongan", nullable = false)
     private String golongan;
+
+    @Column(name = "status_asn", nullable = false)
+    private String statusAsn;
 
     @Column(name = "jabatan_penyuluh", nullable = false)
     private String jabatanPenyuluh;

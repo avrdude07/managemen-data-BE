@@ -74,6 +74,7 @@ public class PenyuluhService {
         penyuluh.setTempatLahir(penyuluhRequestDTO.getTempatLahir());
         penyuluh.setTanggalLahir(penyuluhRequestDTO.getTanggalLahir());
         penyuluh.setGolongan(penyuluhRequestDTO.getGolongan());
+        penyuluh.setStatusAsn(penyuluhRequestDTO.getStatusAsn());
         penyuluh.setJabatanPenyuluh(penyuluhRequestDTO.getJabatanPenyuluh());
         penyuluh.setJurusanPenyuluh(penyuluhRequestDTO.getJurusanPenyuluh());
         penyuluh.setTempatTugas(penyuluhRequestDTO.getTempatTugas());
@@ -86,6 +87,12 @@ public class PenyuluhService {
         if (checkStock != null){
             log.error("An error occurred while updating penyuluh");
             throw new GeneralException("Data Penyuluh Sudah Ada");
+        }
+
+        Penyuluh existing = penyuluhRepository.findByNipPenyuluh(penyuluhRequestDTO.getNipPenyuluh());
+        if (existing != null) {
+            log.error("Duplicate NIP detected: {}", penyuluhRequestDTO.getNipPenyuluh());
+            throw new GeneralException("NIP Penyuluh sudah terdaftar");
         }
 
         penyuluhRepository.save(penyuluh);
@@ -103,6 +110,7 @@ public class PenyuluhService {
         penyuluh.setTempatLahir(penyuluhRequestDTO.getTempatLahir());
         penyuluh.setTanggalLahir(penyuluhRequestDTO.getTanggalLahir());
         penyuluh.setGolongan(penyuluhRequestDTO.getGolongan());
+        penyuluh.setStatusAsn(penyuluhRequestDTO.getStatusAsn());
         penyuluh.setJabatanPenyuluh(penyuluhRequestDTO.getJabatanPenyuluh());
         penyuluh.setJurusanPenyuluh(penyuluhRequestDTO.getJurusanPenyuluh());
         penyuluh.setTempatTugas(penyuluhRequestDTO.getTempatTugas());

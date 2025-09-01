@@ -19,6 +19,7 @@ public class PenyuluhRequestDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date tanggalLahir;
     private String golongan;
+    private String statusAsn;
     private String jabatanPenyuluh;
     private String jurusanPenyuluh;
     private String tempatTugas;
