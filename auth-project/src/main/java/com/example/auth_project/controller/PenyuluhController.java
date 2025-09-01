@@ -30,7 +30,7 @@ public class PenyuluhController {
                                             @RequestParam(required = false) String toDate,
                                             @RequestParam(defaultValue = "1") int offset,
                                             @RequestParam(defaultValue = "10") int limit,
-                                            @RequestParam(defaultValue = "namaPenyuluh") String sortBy,
+                                            @RequestParam(defaultValue = "makerDate") String sortBy,
                                             @RequestParam(defaultValue = "DESC") String orderBy,
                                             @RequestParam(defaultValue = "N") String downloadExcel
     ){
