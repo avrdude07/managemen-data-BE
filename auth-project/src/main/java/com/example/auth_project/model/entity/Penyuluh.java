@@ -25,7 +25,7 @@ public class Penyuluh {
     @Column(name = "nama_penyuluh", nullable = false)
     private String namaPenyuluh;
 
-    @Column(name = "nip_penyuluh", nullable = false, unique = true)
+    @Column(name = "nip_penyuluh", nullable = false)
     private String nipPenyuluh;
 
     @Column(name = "jenis_kelamin", nullable = false)

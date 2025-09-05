@@ -84,14 +84,14 @@ public class PenyuluhService {
         penyuluh.setKecamatan(penyuluhRequestDTO.getKecamatan());
         penyuluh.setProvinsi(penyuluhRequestDTO.getProvinsi());
 
-        Penyuluh checkStock= penyuluhRepository.findByNamaPenyuluh(penyuluhRequestDTO.getNamaPenyuluh());
-        if (checkStock != null){
+        Penyuluh checkPenyuluhByName= penyuluhRepository.findByNamaPenyuluh(penyuluhRequestDTO.getNamaPenyuluh());
+        if (checkPenyuluhByName != null){
             log.error("An error occurred while updating penyuluh");
-            throw new GeneralException("Data Penyuluh Sudah Ada");
+            throw new GeneralException("Nama Penyuluh Sudah terdaftar");
         }
 
-        Penyuluh existing = penyuluhRepository.findByNipPenyuluh(penyuluhRequestDTO.getNipPenyuluh());
-        if (existing != null) {
+        Penyuluh checkPenyuluhByNip = penyuluhRepository.findByNipPenyuluh(penyuluhRequestDTO.getNipPenyuluh());
+        if (checkPenyuluhByNip != null) {
             log.error("Duplicate NIP detected: {}", penyuluhRequestDTO.getNipPenyuluh());
             throw new GeneralException("NIP Penyuluh sudah terdaftar");
         }
@@ -103,6 +103,22 @@ public class PenyuluhService {
     public void updateStock(PenyuluhRequestDTO penyuluhRequestDTO) {
         Penyuluh penyuluh = penyuluhRepository.findById(penyuluhRequestDTO.getPenyuluhId())
                 .orElseThrow(() -> new GeneralException("penyuluh with id " + penyuluhRequestDTO.getPenyuluhId() + " does not exist"));
+
+        Penyuluh checkPenyuluhByName= penyuluhRepository.findByNamaPenyuluh(penyuluhRequestDTO.getNamaPenyuluh());
+        if (checkPenyuluhByName != null){
+            if (!penyuluhRequestDTO.getNamaPenyuluh().equalsIgnoreCase(penyuluh.getNamaPenyuluh())){
+                log.error("An error occurred while updating penyuluh");
+                throw new GeneralException("Nama Penyuluh Sudah terdaftar");
+            }
+        }
+
+        Penyuluh checkPenyuluhByNip = penyuluhRepository.findByNipPenyuluh(penyuluhRequestDTO.getNipPenyuluh());
+        if (checkPenyuluhByNip != null) {
+            if (!penyuluhRequestDTO.getNipPenyuluh().equalsIgnoreCase(penyuluh.getNipPenyuluh())){
+                log.error("Duplicate NIP detected: {}", penyuluhRequestDTO.getNipPenyuluh());
+                throw new GeneralException("NIP Penyuluh sudah terdaftar");
+            }
+        }
 
         penyuluh.setPenyuluhId(penyuluhRequestDTO.getPenyuluhId());
         penyuluh.setNamaPenyuluh(penyuluhRequestDTO.getNamaPenyuluh());

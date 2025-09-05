@@ -5,6 +5,7 @@ import com.example.auth_project.model.dto.PenyuluhRequestDTO;
 import com.example.auth_project.model.dto.SuccessResponseDto;
 import com.example.auth_project.model.entity.Penyuluh;
 import com.example.auth_project.service.PenyuluhService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -69,7 +70,7 @@ public class PenyuluhController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<SuccessResponseDto> addStock(@RequestBody PenyuluhRequestDTO penyuluhRequestDTO) {
+    public ResponseEntity<SuccessResponseDto> addStock(@Valid @RequestBody PenyuluhRequestDTO penyuluhRequestDTO) {
         penyuluhService.addNewStock(penyuluhRequestDTO);
         SuccessResponseDto successResponseDto = new SuccessResponseDto();
         successResponseDto.setStatus(HttpStatus.OK);
@@ -77,7 +78,7 @@ public class PenyuluhController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity<SuccessResponseDto> updateStock(@RequestBody PenyuluhRequestDTO penyuluhRequestDTO) {
+    public ResponseEntity<SuccessResponseDto> updateStock(@Valid @RequestBody PenyuluhRequestDTO penyuluhRequestDTO) {
         penyuluhService.updateStock(penyuluhRequestDTO);
         SuccessResponseDto successResponseDto = new SuccessResponseDto();
         successResponseDto.setStatus(HttpStatus.OK);
