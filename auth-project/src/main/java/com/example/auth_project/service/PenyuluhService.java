@@ -59,6 +59,7 @@ public class PenyuluhService {
             return penyuluhRepository.getPenyuluhPageFilterWithDate(namaPenyuluh, nipPenyuluh, startDate, endDate, pageable);
         } else {
             log.info("Masuk Filter Penyuluh Tanpa Date");
+
             return penyuluhRepository.getPenyuluhPageFilter(namaPenyuluh, nipPenyuluh, pageable);
         }
     }
@@ -169,8 +170,8 @@ public class PenyuluhService {
         DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("ddMMyyyy");
         String currentDate = dateObj.format(formatterDate);
         String excelHeader = "Reporting Penyuluh_" + currentDate;
-        //String uploadPath = "D:\\application\\note\\" + excelHeader + ".xlsx";
-        String uploadPath = "C:\\Users\\basaj\\Downloads\\Rekap Data Penyuluh" + excelHeader + ".xlsx";
+        String uploadPath = "D:\\application\\note\\" + excelHeader + ".xlsx";
+//        String uploadPath = "C:\\Users\\basaj\\Downloads\\Rekap Data Penyuluh" + excelHeader + ".xlsx";
         String reportingType = "MPS";
         String resultExcel = GenerateExcelHelper.excelWrite(uploadPath, reportingType, listGabung);
         return resultExcel;

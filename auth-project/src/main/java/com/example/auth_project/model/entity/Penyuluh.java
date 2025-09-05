@@ -26,7 +26,7 @@ public class Penyuluh {
     private String namaPenyuluh;
 
     @Column(name = "nip_penyuluh", nullable = false, unique = true)
-    private Long nipPenyuluh;
+    private String nipPenyuluh;
 
     @Column(name = "jenis_kelamin", nullable = false)
     private String jenisKelamin;

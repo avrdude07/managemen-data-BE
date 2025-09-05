@@ -13,7 +13,7 @@ import java.util.Date;
 public class PenyuluhRequestDTO {
     private Long penyuluhId;
     private String namaPenyuluh;
-    private Long nipPenyuluh;
+    private String nipPenyuluh;
     private String jenisKelamin;
     private String tempatLahir;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")

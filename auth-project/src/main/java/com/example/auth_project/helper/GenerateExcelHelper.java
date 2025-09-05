@@ -27,7 +27,7 @@ public class GenerateExcelHelper {
         String generateExcelStatus = generateExcel.getPath();
 
         try (FileOutputStream fos = new FileOutputStream(generateExcel)) {
-            String[] tableHeader = {"Nama Penyuluh", "NIP Penyuluh", "Jenis Kelamin", "Tempat Lahir", "Tanggal Lahir", "Golongan", "Jabatan Penyuluh", "Jurusan Penyuluh", "Tempat Tugas", "Nomor Telepon", "Pendidikan Terakhir", "Kecamatan", "Provinsi", "Maker Date"};
+            String[] tableHeader = {"Nama Penyuluh", "NIP Penyuluh", "Jenis Kelamin", "Tempat Lahir", "Tanggal Lahir", "Golongan", "Status ASN", "Jabatan Penyuluh", "Jurusan Penyuluh", "Tempat Tugas", "Nomor Telepon", "Pendidikan Terakhir", "Kecamatan", "Provinsi", "Maker Date"};
             log.info("Table header: {}", (Object) tableHeader);
             writeExcelContent(listGenerateExcel, fos, tableHeader);
 

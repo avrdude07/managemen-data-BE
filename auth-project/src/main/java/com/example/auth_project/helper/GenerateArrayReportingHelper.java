@@ -13,13 +13,13 @@ public class GenerateArrayReportingHelper {
 
     public static List<String[]> listGabung(List<Penyuluh> listPenyuluh) {
         List<String[]> listGabung = new ArrayList<>();
-
         List<String> namaPenyuluh = new ArrayList<>();
         List<String> nipPenyuluh = new ArrayList<>();
         List<String> jenisKelamin = new ArrayList<>();
         List<String> tempatLahir = new ArrayList<>();
         List<String> tanggalLahir = new ArrayList<>();
         List<String> golongan = new ArrayList<>();
+        List<String> statusAsn = new ArrayList<>();
         List<String> jabatanPenyuluh = new ArrayList<>();
         List<String> jurusanPenyuluh = new ArrayList<>();
         List<String> tempatTugas = new ArrayList<>();
@@ -31,11 +31,12 @@ public class GenerateArrayReportingHelper {
 
         for (int i = 0; i < listPenyuluh.size(); i++) {
             namaPenyuluh.add(listPenyuluh.get(i).getNamaPenyuluh());
-            nipPenyuluh.add(listPenyuluh.get(i).getNipPenyuluh().toString());
+            nipPenyuluh.add(listPenyuluh.get(i).getNipPenyuluh());
             jenisKelamin.add(listPenyuluh.get(i).getJenisKelamin());
             tempatLahir.add(listPenyuluh.get(i).getTempatLahir());
             tanggalLahir.add(listPenyuluh.get(i).getTanggalLahir().toString());
             golongan.add(listPenyuluh.get(i).getGolongan());
+            statusAsn.add(listPenyuluh.get(i).getStatusAsn());
             jabatanPenyuluh.add(listPenyuluh.get(i).getJabatanPenyuluh());
             jurusanPenyuluh.add(listPenyuluh.get(i).getJurusanPenyuluh());
             tempatTugas.add(listPenyuluh.get(i).getTempatTugas());
@@ -52,6 +53,7 @@ public class GenerateArrayReportingHelper {
         String[] arrayTempatLahir = tempatLahir.stream().toArray(String[]::new);
         String[] arrayTanggalLahir = tanggalLahir.stream().toArray(String[]::new);
         String[] arrayGolongan = golongan.stream().toArray(String[]::new);
+        String[] arrayStatusAsn = statusAsn.stream().toArray(String[]::new);
         String[] arrayJabatanPenyuluh = jabatanPenyuluh.stream().toArray(String[]::new);
         String[] arrayJurusanPenyuluh = jurusanPenyuluh.stream().toArray(String[]::new);
         String[] arrayTempatTugas = tempatTugas.stream().toArray(String[]::new);
@@ -70,6 +72,7 @@ public class GenerateArrayReportingHelper {
                     arrayTempatLahir[i],
                     arrayTanggalLahir[i],
                     arrayGolongan[i],
+                    arrayStatusAsn[i],
                     arrayJabatanPenyuluh[i],
                     arrayJurusanPenyuluh[i],
                     arrayTempatTugas[i],
